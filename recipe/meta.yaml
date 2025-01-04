@@ -7,22 +7,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pretty_midi-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pretty_midi-{{ version }}.tar.gz
   sha256: f6a249cb843441e1cb78c4c0a1290948d6f56df7486f7974e20d5c80486dc99e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=2.7
+    - python {{ python_min }}
   run:
     - mido
     - numpy >=1.7.0
-    - python >=2.7
+    - python >={{ python_min }}
     - six
 
 test:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/craffel/pretty-midi
